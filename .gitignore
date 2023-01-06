@@ -11,3 +11,6 @@
 
 # User-specific files
 *.suo
+
+# Solution file
+.sln
