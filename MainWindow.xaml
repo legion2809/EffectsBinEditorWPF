@@ -29,7 +29,7 @@
                 <Separator />
                 <MenuItem Header="Exit" InputGestureText="Alt + F4" Click="Exit_Click"/>
             </MenuItem>
-            <MenuItem x:Name="Insert" Header="Insert" Width="60" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}" IsEnabled="False">
+            <MenuItem x:Name="Insert" Header="Insert" Width="60" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}" IsEnabled="False" Click="InsertEffect_Click">
                 <MenuItem Header="Insert Effect" InputGestureText="Ctrl + E"/>
             </MenuItem>
             <MenuItem x:Name="InterfaceLanguage" Header="Interface Language" Width="150" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}">

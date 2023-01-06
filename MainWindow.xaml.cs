@@ -25,6 +25,11 @@ public partial class MainWindow : Window
         CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton);
     }
 
+    private void InsertEffect_Click(object sender, EventArgs e)
+    {
+        CEffectsParser.InsertEffect(EffectsList);
+    }
+
     private void EffectsList_IndexChanged(object sender, EventArgs e)
     {
         CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);

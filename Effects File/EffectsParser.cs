@@ -55,6 +55,12 @@ public class CEffectsParser
         }    
     }
 
+    public static void InsertEffect(ListBox effectsListBox)
+    {
+        effectsDescriptionList.Add(new CEffectsDescription(CEffectsConsts.EFFECTSGN, CEffectsConsts.EFFECTSIZE, CEffectsConsts.UNKNOWN0, 0, 0, 0, CEffectsConsts.UNKNOWN1, 0));
+        VisualEffects(effectsListBox);
+    }
+
     private static void VisualEffects(ListBox effectsListBox)
     {
         effectsListBox.Items.Clear();
