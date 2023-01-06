@@ -17,7 +17,7 @@ public class CEffectsParser
     static float unknown1;
     static uint effectId;
 
-    public static void CreateFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs)
+    public static void CreateFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
     {
         sPath = SetPath();
         if (sPath == null)
@@ -44,10 +44,11 @@ public class CEffectsParser
 
             VisualEffects(effectsListBox);
             EnableButtons(insert, apply, saveFile, saveFileAs);
+            StatusLabel.Content = $"New file created, its location - ({sPath})";
         }
     }
 
-    public static void OpenFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs)
+    public static void OpenFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
     {
         sPath = GetPath();
         if (sPath == null)
@@ -58,7 +59,7 @@ public class CEffectsParser
         using (FileStream fileStream = new FileStream(sPath, FileMode.Open))
         using (BinaryReader binaryReader = new BinaryReader(fileStream))
         {
-            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { MessageBox.Show("Невозможно прочитать файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); Error(effectsListBox, insert, apply, saveFile, saveFileAs); return; }
+            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { MessageBox.Show("Невозможно прочитать файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); Error(effectsListBox, insert, apply, saveFile, saveFileAs, StatusLabel); return; }
             headSize = binaryReader.ReadUInt32();
 
             effectsCount = (headSize - 6) / 74;
@@ -78,10 +79,11 @@ public class CEffectsParser
             }
             VisualEffects(effectsListBox);
             EnableButtons(insert, apply, saveFile, saveFileAs);
+            StatusLabel.Content = $"File opened - ({sPath})";
         }
     }
 
-    public static void SaveFile()
+    public static void SaveFile(Label StatusLabel)
     {
         if (effectsDescriptionList == null)
             return;
@@ -116,9 +118,11 @@ public class CEffectsParser
             binaryWriter.Seek(2, SeekOrigin.Begin);
             binaryWriter.Write(sizeout, 0, 4);
         }
+
+        StatusLabel.Content = $"File saved - ({sPath})";
     }
 
-    public static void SaveFileAs()
+    public static void SaveFileAs(Label StatusLabel)
     {
         string newPath = NewPath(sPath);
         if (newPath == null || newPath == "Canceled")
@@ -126,13 +130,46 @@ public class CEffectsParser
             return;
         }
 
-        SaveFile();
+        SaveFile(StatusLabel);
     }
 
-    public static void InsertEffect(ListBox effectsListBox)
+    public static void InsertEffect(ListBox effectsListBox, Label StatusLabel)
     {
+        if (effectsListBox == null)
+            return;
+
         effectsDescriptionList.Add(new CEffectsDescription(CEffectsConsts.EFFECTSGN, CEffectsConsts.EFFECTSIZE, CEffectsConsts.UNKNOWN0, 0, 0, 0, CEffectsConsts.UNKNOWN1, 0));
         VisualEffects(effectsListBox);
+        StatusLabel.Content = $"File changed - ({sPath}*)";
+    }
+
+    public static void ApplyProperties(ListBox effectsListBox, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID)
+    {
+        int selectedIndex = effectsListBox.SelectedIndex;
+
+        if (selectedIndex < 0)
+            return;
+
+        try
+        {
+            effectSgn = effectsDescriptionList[selectedIndex].effectSgn;
+            effectSize = effectsDescriptionList[selectedIndex].effectSize;
+            unknown0 = effectsDescriptionList[selectedIndex].unknown0;
+            effectPositionX = float.Parse(XCoordinate.Text);
+            effectPositionY = float.Parse(YCoordinate.Text);
+            effectPositionZ = float.Parse(ZCoordinate.Text);
+            unknown1 = effectsDescriptionList[selectedIndex].unknown1;
+            effectId = uint.Parse(EffectID.Text);
+
+            effectsDescriptionList[selectedIndex] = new CEffectsDescription(effectSgn, effectSize, unknown0, effectPositionX, effectPositionY, effectPositionZ, unknown1, effectId);
+            VisualEffects(effectsListBox);
+            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
+        }
+
+        catch
+        {
+
+        }
     }
 
     private static void VisualEffects(ListBox effectsListBox)
@@ -182,11 +219,12 @@ public class CEffectsParser
         saveFileAs.IsEnabled = false;
     }
 
-    private static void Error(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs)
+    private static void Error(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
     {
         effectsDescriptionList.Clear();
         effectsListBox.Items.Clear();
         DisableButtons(insert, apply, saveFile, saveFileAs);
+        StatusLabel.Content = string.Empty;
     }
 
     private static string GetPath()

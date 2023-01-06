@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EffectsBinEditorWPF"
         mc:Ignorable="d"
         Icon="/Icon/Icon.ico"
-        Title="Effects.bin Editor" Height="500" Width="900" MinHeight="500" MinWidth="900">
+        Title="Effects.bin Editor" Height="520" Width="940" MinHeight="520" MinWidth="940" MaxHeight="520" MaxWidth="940">
 
     <Window.CommandBindings>
 
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="81*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="900" Background="AliceBlue">
+        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="940" Background="AliceBlue">
             <MenuItem x:Name="File" Header="File" Width="40" Height="25" Margin="10,0,0,0" FontSize="20" FontFamily="{StaticResource ApicalC}">
                 <MenuItem Header="New File..." InputGestureText="Ctrl + N" Click="CreateFile_Click"/>
                 <MenuItem Header="Open" InputGestureText="Ctrl + O" Click="OpenFile_Click"/>
@@ -70,8 +70,8 @@
                         <StaticResource ResourceKey="ApicalC"/>
                     </TextBox.FontFamily>
                 </TextBox>
-                
-                <TextBox x:Name="XCoordTextBox" Height="25" FontSize="19" Margin="58,70,56,257">
+
+                <TextBox x:Name="XCoordTextBox" Height="25" FontSize="19" Margin="58,70,56,257" PreviewTextInput = "NumericOnly">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -81,7 +81,7 @@
                         <StaticResource ResourceKey="ApicalC"/>
                     </TextBox.FontFamily>
                 </TextBox>
-                
+
                 <TextBox x:Name="ZCoordTextBox" Width="200" Height="25" FontSize="19" Margin="58,176,56,151">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -92,7 +92,7 @@
                         <StaticResource ResourceKey="ApicalC"/>
                     </TextBox.FontFamily>
                 </TextBox>
-                
+
                 <TextBox x:Name="EffectIDTextBox" Height="25" FontSize="19" Margin="125,226,56,101">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -103,8 +103,8 @@
                         <StaticResource ResourceKey="ApicalC"/>
                     </TextBox.FontFamily>
                 </TextBox>
-                
-                <Button x:Name="ApplyButton" Content="Apply" FontSize="20" Height="30" Width="108" Margin="103,301,103,21" IsEnabled="False">
+
+                <Button x:Name="ApplyButton" Content="Apply" FontSize="20" Height="30" Width="108" Margin="103,301,103,21" IsEnabled="False" Click="Apply_Click">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -114,12 +114,13 @@
                         <StaticResource ResourceKey="ApicalC"/>
                     </Button.FontFamily>
                 </Button>
-                
+
                 <Label Content="X:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,64,258,251"/>
                 <Label Content="Y:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,117,259,200"/>
                 <Label Content="Z:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,170,260,145"/>
                 <Label Content="Effect ID:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,220,189,95"/>
             </Grid>
         </GroupBox>
+        <Label x:Name="StatusLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" FontFamily="{StaticResource ApicalC}" FontSize="19" Margin="20,446,0,0" Height="48" Width="910"/>
     </Grid>
 </Window>
