@@ -234,9 +234,7 @@ public class CEffectsParser
         fileDialog.Title = "Открытие файла";
 
         if (fileDialog.ShowDialog() != true)
-        {
             return null;
-        }
 
         return fileDialog.FileName;
     }
@@ -248,9 +246,7 @@ public class CEffectsParser
         commonFileDialog.Title = "Создание файла";
 
         if (commonFileDialog.ShowDialog() != CommonFileDialogResult.Ok)
-        {
             return null;
-        }
 
         return commonFileDialog.FileName + "\\effects.bin";
     }
