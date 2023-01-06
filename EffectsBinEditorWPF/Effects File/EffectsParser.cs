@@ -17,7 +17,7 @@ public class CEffectsParser
     static float unknown1;
     static uint effectId;
 
-    public static void CreateFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
+    public static void CreateFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton)
     {
         sPath = SetPath();
         if (sPath == null)
@@ -43,12 +43,12 @@ public class CEffectsParser
             binaryWriter.Write(sizeout, 0, 4);
 
             VisualEffects(effectsListBox);
-            EnableButtons(insert, apply, saveFile, saveFileAs);
+            EnableButtons(insert, apply, saveFile, saveFileAs, deleteButton);
             StatusLabel.Content = $"New file created, its location - ({sPath})";
         }
     }
 
-    public static void OpenFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
+    public static void OpenFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton)
     {
         sPath = GetPath();
         if (sPath == null)
@@ -59,7 +59,7 @@ public class CEffectsParser
         using (FileStream fileStream = new FileStream(sPath, FileMode.Open))
         using (BinaryReader binaryReader = new BinaryReader(fileStream))
         {
-            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { MessageBox.Show("Невозможно прочитать файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); Error(effectsListBox, insert, apply, saveFile, saveFileAs, StatusLabel); return; }
+            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { MessageBox.Show("Невозможно прочитать файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); Error(effectsListBox, insert, apply, saveFile, saveFileAs, StatusLabel, deleteButton); return; }
             headSize = binaryReader.ReadUInt32();
 
             effectsCount = (headSize - 6) / 74;
@@ -78,7 +78,7 @@ public class CEffectsParser
                 effectsDescriptionList.Add(new CEffectsDescription(effectSgn, effectSize, unknown0, effectPositionX, effectPositionY, effectPositionZ, unknown1, effectId));
             }
             VisualEffects(effectsListBox);
-            EnableButtons(insert, apply, saveFile, saveFileAs);
+            EnableButtons(insert, apply, saveFile, saveFileAs, deleteButton);
             StatusLabel.Content = $"File opened - ({sPath})";
         }
     }
@@ -164,12 +164,30 @@ public class CEffectsParser
             effectsDescriptionList[selectedIndex] = new CEffectsDescription(effectSgn, effectSize, unknown0, effectPositionX, effectPositionY, effectPositionZ, unknown1, effectId);
             VisualEffects(effectsListBox);
             VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
+            effectsListBox.SelectedIndex = selectedIndex;
         }
 
         catch
         {
-
+            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
         }
+    }
+
+    public static void DeleteEffect(ListBox effectsListBox)
+    {
+        int selectedIndex = effectsListBox.SelectedIndex;
+
+        if (selectedIndex < 0 || effectsDescriptionList == null)
+            return;
+
+        effectsDescriptionList.RemoveAt(selectedIndex);
+        VisualEffects(effectsListBox);
+
+        if (selectedIndex - 1 < 0)
+            effectsListBox.SelectedIndex = selectedIndex;
+
+        else
+            effectsListBox.SelectedIndex = selectedIndex - 1;
     }
 
     private static void VisualEffects(ListBox effectsListBox)
@@ -204,26 +222,28 @@ public class CEffectsParser
         EffectID.Text = effectsDescriptionList[selectedIndex].effectId.ToString();
     }
 
-    private static void EnableButtons(MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs)
+    private static void EnableButtons(MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, MenuItem deleteButton)
     {
         insert.IsEnabled = true;
         apply.IsEnabled = true;
         saveFile.IsEnabled = true;
         saveFileAs.IsEnabled = true;
+        deleteButton.IsEnabled = true;
     }
-    private static void DisableButtons(MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs)
+    private static void DisableButtons(MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, MenuItem deleteButton)
     {
         insert.IsEnabled = false;
         apply.IsEnabled = false;
         saveFile.IsEnabled = false;
         saveFileAs.IsEnabled = false;
+        deleteButton.IsEnabled = false;
     }
 
-    private static void Error(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel)
+    private static void Error(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton)
     {
         effectsDescriptionList.Clear();
         effectsListBox.Items.Clear();
-        DisableButtons(insert, apply, saveFile, saveFileAs);
+        DisableButtons(insert, apply, saveFile, saveFileAs, deleteButton);
         StatusLabel.Content = string.Empty;
     }
 

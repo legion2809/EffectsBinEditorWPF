@@ -53,7 +53,7 @@
 
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="DeleteEffect">Delete</MenuItem>
+                    <MenuItem x:Name="DeleteButton" Header="Delete" FontFamily="{StaticResource ApicalC}" FontSize="18" IsEnabled="False" Click="DeleteButton_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

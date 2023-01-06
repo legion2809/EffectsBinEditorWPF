@@ -11,58 +11,14 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    protected override void OnPreviewKeyDown(KeyEventArgs e)
-    {
-        e.Handled = (e.Key == Key.Space);
-        base.OnPreviewKeyDown(e);
-    }
-
-    private void FloatOnly(object sender, TextCompositionEventArgs e)
-    {
-        e.Handled = !FloatOrDoubleCharChecker(Convert.ToChar(e.Text));
-        base.OnTextInput(e);
-    }
-
-    private void NumericOnly(object sender, TextCompositionEventArgs e)
-    {
-        e.Handled = !IntegerCharChecker(Convert.ToChar(e.Text));
-        base.OnTextInput(e);
-    }
-
-    private bool FloatOrDoubleCharChecker(char str)
-
-    {
-        if (char.IsDigit(str) || str == '-' || str == '.' || str == ',')
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private bool IntegerCharChecker(char str)
-
-    {
-        if (char.IsDigit(str))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private void CreateFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.CreateFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel);
+        CEffectsParser.CreateFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton);
     }
 
     private void OpenFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel);
+        CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton);
     }
 
     private void SaveFile_Click(Object sender, EventArgs e)
@@ -85,9 +41,50 @@ public partial class MainWindow : Window
         CEffectsParser.ApplyProperties(EffectsList, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
+    private void DeleteButton_Click(object sender, EventArgs e)
+    {
+        CEffectsParser.DeleteEffect(EffectsList);
+    }
+
     private void EffectsList_IndexChanged(object sender, EventArgs e)
     {
         CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+    }
+
+    protected override void OnPreviewKeyDown(KeyEventArgs e)
+    {
+        e.Handled = (e.Key == Key.Space);
+        base.OnPreviewKeyDown(e);
+    }
+
+    private void FloatOnly(object sender, TextCompositionEventArgs e)
+    {
+        e.Handled = !FloatOrDoubleCharChecker(Convert.ToChar(e.Text));
+        base.OnTextInput(e);
+    }
+
+    private void NumericOnly(object sender, TextCompositionEventArgs e)
+    {
+        e.Handled = !IntegerCharChecker(Convert.ToChar(e.Text));
+        base.OnTextInput(e);
+    }
+
+    private bool FloatOrDoubleCharChecker(char str)
+
+    {
+        if (char.IsDigit(str) || str == '-' || str == '.' || str == ',')
+            return true;
+        else
+            return false;
+    }
+
+    private bool IntegerCharChecker(char str)
+
+    {
+        if (char.IsDigit(str))
+            return true;
+        else
+            return false;
     }
 
     private void About_Click(object sender, EventArgs e)
