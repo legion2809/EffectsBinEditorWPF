@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace EffectsBinEditorWPF;
+﻿namespace EffectsBinEditorWPF;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -47,13 +45,6 @@ public partial class MainWindow : Window
     private void EffectsList_IndexChanged(object sender, EventArgs e)
     {
         CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
-    }
-
-    private void NumericOnly(object sender, TextCompositionEventArgs e)
-    {
-        //"[^0-9]+"
-        /* Regex regex = new Regex("[+-]?([0-9]*[.])?[0-9]+");
-         e.Handled = regex.IsMatch(e.Text);*/
     }
 
     private void About_Click(object sender, EventArgs e)
