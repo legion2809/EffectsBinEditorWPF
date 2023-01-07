@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EffectsBinEditorWPF"
         mc:Ignorable="d"
         Icon="/Icon/Icon.ico"
-        Title="Effects.bin Editor" Height="520" Width="940" MinHeight="520" MinWidth="940" MaxHeight="520" MaxWidth="940">
+        Title="Effects.bin Editor" Height="520" Width="939" MinHeight="520" MinWidth="939" MaxHeight="520" MaxWidth="939">
 
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewFile_CanExecute" Executed="NewFile_Executed"/>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EffectsBinEditorWPF"
         mc:Ignorable="d"
-        Title="MessageBox" Height="300" Width="940" MinHeight="300" MinWidth="940" MaxHeight="300" MaxWidth="940"
-        WindowStyle="None">
+        Title="MessageBox" Height="300" Width="923" MinHeight="300" MinWidth="923" MaxHeight="300" MaxWidth="923"
+        WindowStyle="None"
+        AllowsTransparency="True">
     <Grid>
         <Label x:Name="Title" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,46,0,0" Content="Error" FontFamily="{StaticResource ApicalC}" FontSize="35" Foreground="WhiteSmoke"/>
         <Label x:Name="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,99,0,0" Content="Description" FontFamily="{StaticResource ApicalC}" FontSize="25" Foreground="WhiteSmoke"/>
