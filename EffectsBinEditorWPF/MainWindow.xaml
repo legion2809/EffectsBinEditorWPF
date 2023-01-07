@@ -13,6 +13,7 @@
         <CommandBinding Command="Open" CanExecute="OpenFile_CanExecute" Executed="OpenFile_Executed"/>
         <CommandBinding Command="Save" CanExecute="SaveFile_CanExecute" Executed="SaveFile_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.InsertEffectCommand}" CanExecute="InsertEffect_CanExecute" Executed="InsertEffect_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.DeleteEffectCommand}" CanExecute="DeleteEffect_CanExecute" Executed="DeleteEffect_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.AboutCommand}" CanExecute="Authors_CanExecute" Executed="Authors_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.SaveAsCommand}" CanExecute="SaveFileAs_CanExecute" Executed="SaveFileAs_Executed"/>
         <CommandBinding Command="{x:Static local:MainWindow.ExitProgramCommand}" CanExecute="ExitProgram_CanExecute" Executed="ExitProgram_Executed"/>
@@ -63,7 +64,7 @@
 
             <ListBox.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="DeleteButton" Header="Delete" FontFamily="{StaticResource ApicalC}" FontSize="18" IsEnabled="False" Click="DeleteButton_Click"/>
+                    <MenuItem x:Name="DeleteEffect" Header="Delete" InputGestureText="Del" FontFamily="{StaticResource ApicalC}" FontSize="18" IsEnabled="False" Click="DeleteButton_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

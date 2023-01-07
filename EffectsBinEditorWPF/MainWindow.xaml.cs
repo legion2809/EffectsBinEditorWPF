@@ -12,6 +12,7 @@ public partial class MainWindow : Window
     public static RoutedCommand AboutCommand = new RoutedCommand();
     public static RoutedCommand SaveAsCommand = new RoutedCommand();
     public static RoutedCommand ExitProgramCommand = new RoutedCommand();
+    public static RoutedCommand DeleteEffectCommand = new RoutedCommand();
 
     public MainWindow()
     {
@@ -23,6 +24,7 @@ public partial class MainWindow : Window
         InsertEffectCommand.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
         AboutCommand.InputGestures.Add(new KeyGesture(Key.F1));
         ExitProgramCommand.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
+        DeleteEffectCommand.InputGestures.Add(new KeyGesture(Key.Delete));
     }
 
     #region Shortcut keys
@@ -57,6 +59,15 @@ public partial class MainWindow : Window
     }
 
     private void InsertEffect_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        if (SaveFile.IsEnabled != true)
+        {
+            e.CanExecute = false;
+            return;
+        }
+        e.CanExecute = true;
+    }
+    private void DeleteEffect_CanExecute(object sender, CanExecuteRoutedEventArgs e)
     {
         if (SaveFile.IsEnabled != true)
         {
@@ -101,6 +112,11 @@ public partial class MainWindow : Window
         InsertEffect.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
     }
 
+    private void DeleteEffect_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        DeleteEffect.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
     private void Authors_Executed(object sender, ExecutedRoutedEventArgs e)
     {
         Authors.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
@@ -114,12 +130,12 @@ public partial class MainWindow : Window
 
     private void CreateFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.CreateFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.CreateFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteEffect, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void OpenFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.OpenFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.OpenFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteEffect, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void SaveFile_Click(object sender, EventArgs e)
