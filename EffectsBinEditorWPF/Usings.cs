@@ -7,4 +7,5 @@ global using System.Windows.Input;
 global using Microsoft.Win32;
 global using Microsoft.WindowsAPICodePack.Dialogs;
 global using EffectsBinEditorWPF.Effects_File;
-
+global using System.Windows.Media;
+global using Color = System.Windows.Media.Color;

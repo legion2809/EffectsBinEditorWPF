@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace EffectsBinEditorWPF.Effects_File;
 public class CEffectsParser
@@ -18,7 +19,7 @@ public class CEffectsParser
     static float unknown1;
     static uint effectId;
 
-    public static void CreateFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
+    public static void CreateFile(Window mainWindow, ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
     {
         sPath = SetPath();
         if (sPath == null)
@@ -48,7 +49,7 @@ public class CEffectsParser
         }
     }
 
-    public static void OpenFile(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
+    public static void OpenFile(Window mainWindow, ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
     {
         sPath = GetPath();
         if (sPath == null)
@@ -59,7 +60,7 @@ public class CEffectsParser
         using (FileStream fileStream = new FileStream(sPath, FileMode.Open))
         using (BinaryReader binaryReader = new BinaryReader(fileStream))
         {
-            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { MessageBox.Show("Невозможно прочитать файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); Error(effectsListBox, insert, apply, saveFile, saveFileAs, StatusLabel, deleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox); return; }
+            headSgn = binaryReader.ReadUInt16(); if (headSgn != 100) { CMessageBoxShow.MessageShow(mainWindow, "Error!", "Couldn't parse the file!", 255, 207, 65, 43); Error(effectsListBox, insert, apply, saveFile, saveFileAs, StatusLabel, deleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox); return; }
             headSize = binaryReader.ReadUInt32();
 
             effectsCount = (headSize - 6) / 74;
@@ -144,7 +145,7 @@ public class CEffectsParser
         StatusLabel.Content = $"File changed - ({sPath}*)";
     }
 
-    public static void ApplyProperties(ListBox effectsListBox, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID)
+    public static void ApplyProperties(Window mainWindow, ListBox effectsListBox, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID)
     {
         int selectedIndex = effectsListBox.SelectedIndex;
 
@@ -168,9 +169,10 @@ public class CEffectsParser
             effectsListBox.SelectedIndex = selectedIndex;
         }
 
-        catch
+        catch (Exception ex)
         {
             VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
+            CMessageBoxShow.MessageShow(mainWindow, "Warning", ex.Message, 255, 245, 156, 33);
         }
     }
 

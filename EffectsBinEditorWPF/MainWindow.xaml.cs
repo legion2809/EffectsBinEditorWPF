@@ -114,12 +114,12 @@ public partial class MainWindow : Window
 
     private void CreateFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.CreateFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.CreateFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void OpenFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.OpenFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void SaveFile_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ public partial class MainWindow : Window
 
     private void Apply_Click(object sender, EventArgs e)
     {
-        CEffectsParser.ApplyProperties(EffectsList, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.ApplyProperties(this, EffectsList, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void DeleteButton_Click(object sender, EventArgs e)
@@ -195,8 +195,7 @@ public partial class MainWindow : Window
 
     private void About_Click(object sender, EventArgs e)
     {
-        MessageBox.Show($"Effects.bin Editor\nAuthors: Smelson and Legion.\n(С) {DateTime.Now.Year}. From Russia and Kazakhstan with love!", "About Us",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+        CMessageBoxShow.MessageShow(this, "About", $"Effects.bin Editor\nAuthors: Smelson and Legion.\n(С) {DateTime.Now.Year}. From Russia and Kazakhstan with love!", 255, 46, 169, 218);
     }
 
     private void Exit_Click(object sender, EventArgs e)
