@@ -24,6 +24,10 @@ public class CEffectsParser
 
         effectsDescriptionList.Clear();
         effectsListBox.Items.Clear();
+        XCoordTextBox.Clear();
+        YCoordTextBox.Clear();
+        ZCoordTextBox.Clear();
+        EffectIDTextBox.Clear();
 
         using (FileStream fileStream = new FileStream(sPath, FileMode.Create))
         using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
@@ -54,6 +58,10 @@ public class CEffectsParser
             return;
 
         effectsDescriptionList.Clear();
+        XCoordTextBox.Clear();
+        YCoordTextBox.Clear();
+        ZCoordTextBox.Clear();
+        EffectIDTextBox.Clear();
 
         using (FileStream fileStream = new FileStream(sPath, FileMode.Open))
         using (BinaryReader binaryReader = new BinaryReader(fileStream))
