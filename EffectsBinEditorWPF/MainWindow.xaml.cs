@@ -5,11 +5,112 @@
 /// </summary>
 public partial class MainWindow : Window
 {
+    public static RoutedCommand NewFileCommand = new RoutedCommand();
+    public static RoutedCommand OpenFileCommand = new RoutedCommand();
+    public static RoutedCommand SaveFileCommand = new RoutedCommand();
+    public static RoutedCommand InsertEffectCommand = new RoutedCommand();
+    public static RoutedCommand AboutCommand = new RoutedCommand();
+    public static RoutedCommand SaveAsCommand = new RoutedCommand();
+    public static RoutedCommand ExitProgramCommand = new RoutedCommand();
 
     public MainWindow()
     {
         InitializeComponent();
+
+        NewFileCommand.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+        OpenFileCommand.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
+        SaveFileCommand.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+        InsertEffectCommand.InputGestures.Add(new KeyGesture(Key.E, ModifierKeys.Control));
+        AboutCommand.InputGestures.Add(new KeyGesture(Key.F1));
+        ExitProgramCommand.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
     }
+
+    #region Shortcut keys
+    private void NewFile_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+
+    private void OpenFile_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+
+    private void SaveFile_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        if (SaveFile.IsEnabled != true)
+        {
+            e.CanExecute = false;
+            return;
+        }
+        e.CanExecute = true;
+    }
+
+    private void SaveFileAs_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        if (SaveFile.IsEnabled != true)
+        {
+            e.CanExecute = false;
+            return;
+        }
+        e.CanExecute = true;
+    }
+
+    private void InsertEffect_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        if (SaveFile.IsEnabled != true)
+        {
+            e.CanExecute = false;
+            return;
+        }
+        e.CanExecute = true;
+    }
+
+    private void Authors_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+
+    private void ExitProgram_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+
+    private void NewFile_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        NewFile.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void OpenFile_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        OpenFile.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void SaveFile_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        SaveFile.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void SaveFileAs_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        SaveFileAs.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void InsertEffect_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        InsertEffect.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void Authors_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        Authors.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+
+    private void ExitProgram_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        ExitProgram.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
+    }
+    #endregion
 
     private void CreateFile_Click(object sender, EventArgs e)
     {
@@ -21,12 +122,12 @@ public partial class MainWindow : Window
         CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
-    private void SaveFile_Click(Object sender, EventArgs e)
+    private void SaveFile_Click(object sender, EventArgs e)
     {
         CEffectsParser.SaveFile(StatusLabel);
     }
 
-    private void SaveFileAs_Click(Object sender, EventArgs e)
+    private void SaveFileAs_Click(object sender, EventArgs e)
     {
         CEffectsParser.SaveFileAs(StatusLabel);
     }

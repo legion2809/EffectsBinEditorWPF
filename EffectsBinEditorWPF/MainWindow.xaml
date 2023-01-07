@@ -9,7 +9,18 @@
         Title="Effects.bin Editor" Height="520" Width="940" MinHeight="520" MinWidth="940" MaxHeight="520" MaxWidth="940">
 
     <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewFile_CanExecute" Executed="NewFile_Executed"/>
+        <CommandBinding Command="Open" CanExecute="OpenFile_CanExecute" Executed="OpenFile_Executed"/>
+        <CommandBinding Command="Save" CanExecute="SaveFile_CanExecute" Executed="SaveFile_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.InsertEffectCommand}" CanExecute="InsertEffect_CanExecute" Executed="InsertEffect_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AboutCommand}" CanExecute="Authors_CanExecute" Executed="Authors_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.SaveAsCommand}" CanExecute="SaveFileAs_CanExecute" Executed="SaveFileAs_Executed"/>
+        <CommandBinding Command="{x:Static local:MainWindow.ExitProgramCommand}" CanExecute="ExitProgram_CanExecute" Executed="ExitProgram_Executed"/>
     </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+Alt+S" Command="{x:Static local:MainWindow.SaveAsCommand}"/>
+    </Window.InputBindings>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,24 +31,24 @@
 
         <Menu Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="940" Background="AliceBlue">
             <MenuItem x:Name="File" Header="File" Width="40" Height="25" Margin="10,0,0,0" FontSize="20" FontFamily="{StaticResource ApicalC}">
-                <MenuItem Header="New File..." InputGestureText="Ctrl + N" Click="CreateFile_Click"/>
-                <MenuItem Header="Open" InputGestureText="Ctrl + O" Click="OpenFile_Click"/>
+                <MenuItem x:Name="NewFile" Header="New File..." InputGestureText="Ctrl + N" Click="CreateFile_Click"/>
+                <MenuItem x:Name="OpenFile" Header="Open" InputGestureText="Ctrl + O" Click="OpenFile_Click"/>
                 <Separator />
                 <MenuItem x:Name="SaveFile" Header="Save" InputGestureText="Ctrl + S" IsEnabled="False" Click="SaveFile_Click"/>
                 <MenuItem x:Name="SaveFileAs" Header="Save As..." InputGestureText="Ctrl + Alt + S" IsEnabled="False" Click="SaveFileAs_Click"/>
                 <Separator />
-                <MenuItem Header="Exit" InputGestureText="Alt + F4" Click="Exit_Click"/>
+                <MenuItem x:Name="ExitProgram" Header="Exit" InputGestureText="Alt + F4" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem x:Name="Insert" Header="Insert" Width="60" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}" IsEnabled="False" Click="InsertEffect_Click">
-                <MenuItem Header="Insert Effect" InputGestureText="Ctrl + E"/>
+                <MenuItem x:Name="InsertEffect" Header="Insert Effect" InputGestureText="Ctrl + E"/>
             </MenuItem>
             <MenuItem x:Name="InterfaceLanguage" Header="Interface Language" Width="150" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}">
                 <MenuItem Header="English (United Kingdom)" IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Russian" IsCheckable="True"/>
             </MenuItem>
             <MenuItem x:Name="About" Header="About" Width="55" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}">
-                <MenuItem Header="Authors" InputGestureText="F1" Click="About_Click"/>
-                <MenuItem Header="Check For Updates..."/>
+                <MenuItem x:Name="Authors" Header="Authors" InputGestureText="F1" Click="About_Click"/>
+                <MenuItem x:Name="CheckForUpdates" Header="Check For Updates..."/>
             </MenuItem>
         </Menu>
 
