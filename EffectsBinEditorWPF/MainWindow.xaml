@@ -9,7 +9,6 @@
         Title="Effects.bin Editor" Height="520" Width="940" MinHeight="520" MinWidth="940" MaxHeight="520" MaxWidth="940">
 
     <Window.CommandBindings>
-
     </Window.CommandBindings>
 
     <Grid>
@@ -44,7 +43,7 @@
 
         <Label Content="Effects:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="20,39,0,0" Height="38" Width="73"/>
 
-        <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="EffectsList" Margin="20,80,0,0" Grid.ColumnSpan="1" Background="White" Width="250" Height="350" FontFamily="{StaticResource ApicalC}" FontSize="20" SelectionChanged="EffectsList_IndexChanged">
+        <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="EffectsList" Margin="20,80,0,0" Grid.ColumnSpan="1" Background="White" Width="250" Height="350" FontFamily="{StaticResource ApicalC}" FontSize="20" SelectionChanged="EffectsList_IndexChanged" MouseDown="EffectsList_MouseDown">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -60,7 +59,7 @@
 
         <GroupBox Header="Properties:" Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="29,43,0,0" FontFamily="{StaticResource ApicalC}" FontSize="24" Width="326" Height="387">
             <Grid>
-                <TextBox x:Name="XCoordTextBox" Height="25" FontSize="19" Margin="58,70,56,257" PreviewTextInput="FloatOnly">
+                <TextBox x:Name="XCoordTextBox" Height="25" FontSize="19" Margin="58,70,56,257" PreviewTextInput="FloatOnly" IsEnabled="False">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -71,7 +70,7 @@
                     </TextBox.FontFamily>
                 </TextBox>
 
-                <TextBox x:Name="YCoordTextBox" Width="200" Height="25" FontSize="19" Margin="58,122,56,205" PreviewTextInput="FloatOnly">
+                <TextBox x:Name="YCoordTextBox" Width="200" Height="25" FontSize="19" Margin="58,122,56,205" PreviewTextInput="FloatOnly" IsEnabled="False">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -82,7 +81,7 @@
                     </TextBox.FontFamily>
                 </TextBox>
 
-                <TextBox x:Name="ZCoordTextBox" Width="200" Height="25" FontSize="19" Margin="58,176,56,151" PreviewTextInput="FloatOnly">
+                <TextBox x:Name="ZCoordTextBox" Width="200" Height="25" FontSize="19" Margin="58,176,56,151" PreviewTextInput="FloatOnly" IsEnabled="False">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>
@@ -93,7 +92,7 @@
                     </TextBox.FontFamily>
                 </TextBox>
 
-                <TextBox x:Name="EffectIDTextBox" Height="25" FontSize="19" Margin="125,226,56,101" PreviewTextInput="NumericOnly">
+                <TextBox x:Name="EffectIDTextBox" Height="25" FontSize="19" Margin="125,226,56,101" PreviewTextInput="NumericOnly" IsEnabled="False">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7"/>

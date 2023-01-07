@@ -13,12 +13,12 @@ public partial class MainWindow : Window
 
     private void CreateFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.CreateFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton);
+        CEffectsParser.CreateFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void OpenFile_Click(object sender, EventArgs e)
     {
-        CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton);
+        CEffectsParser.OpenFile(EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteButton, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
     }
 
     private void SaveFile_Click(Object sender, EventArgs e)
@@ -49,6 +49,11 @@ public partial class MainWindow : Window
     private void EffectsList_IndexChanged(object sender, EventArgs e)
     {
         CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+    }
+
+    private void EffectsList_MouseDown(object sender, MouseEventArgs e)
+    {
+        EffectsList.SelectedIndex = -1;
     }
 
     protected override void OnPreviewKeyDown(KeyEventArgs e)
