@@ -123,8 +123,8 @@ public class CEffectsParser
 
     public static void SaveFileAs(Label StatusLabel)
     {
-        string newPath = NewPath(sPath);
-        if (newPath == null || newPath == "Canceled")
+        sPath = NewPath(sPath);
+        if (sPath == null || sPath == "Canceled")
         {
             return;
         }
