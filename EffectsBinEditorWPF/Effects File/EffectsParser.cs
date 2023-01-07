@@ -1,4 +1,6 @@
-﻿namespace EffectsBinEditorWPF.Effects_File;
+﻿using System.Windows.Media;
+
+namespace EffectsBinEditorWPF.Effects_File;
 public class CEffectsParser
 {
     static string sPath;
@@ -22,12 +24,7 @@ public class CEffectsParser
         if (sPath == null)
             return;
 
-        effectsDescriptionList.Clear();
-        effectsListBox.Items.Clear();
-        XCoordTextBox.Clear();
-        YCoordTextBox.Clear();
-        ZCoordTextBox.Clear();
-        EffectIDTextBox.Clear();
+        ClearFields(effectsListBox, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
 
         using (FileStream fileStream = new FileStream(sPath, FileMode.Create))
         using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
@@ -57,11 +54,7 @@ public class CEffectsParser
         if (sPath == null)
             return;
 
-        effectsDescriptionList.Clear();
-        XCoordTextBox.Clear();
-        YCoordTextBox.Clear();
-        ZCoordTextBox.Clear();
-        EffectIDTextBox.Clear();
+        ClearFields(effectsListBox, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
 
         using (FileStream fileStream = new FileStream(sPath, FileMode.Open))
         using (BinaryReader binaryReader = new BinaryReader(fileStream))
@@ -131,12 +124,13 @@ public class CEffectsParser
 
     public static void SaveFileAs(Label StatusLabel)
     {
-        sPath = NewPath(sPath);
-        if (sPath == null || sPath == "Canceled")
+        string newPath = NewPath(sPath);
+        if (newPath == null || newPath == "Canceled")
         {
             return;
         }
 
+        sPath = newPath;
         SaveFile(StatusLabel);
     }
 
@@ -262,6 +256,16 @@ public class CEffectsParser
         StatusLabel.Content = string.Empty;
     }
 
+    private static void ClearFields(ListBox effectsListBox, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
+    {
+        effectsDescriptionList.Clear();
+        effectsListBox.Items.Clear();
+        XCoordTextBox.Clear();
+        YCoordTextBox.Clear();
+        ZCoordTextBox.Clear();
+        EffectIDTextBox.Clear();
+    }
+
     private static string GetPath()
     {
         OpenFileDialog fileDialog = new OpenFileDialog();
@@ -290,7 +294,7 @@ public class CEffectsParser
     {
         SaveFileDialog saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = "Effects.bin file(*.bin)|*.bin|All Files(*.*)|*.*";
-        saveFileDialog.Title = "Сохранение файла";
+        saveFileDialog.Title = "Сохранение";
 
         if (saveFileDialog.ShowDialog() == true)
             return saveFileDialog.FileName;
