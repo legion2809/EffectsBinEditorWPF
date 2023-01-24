@@ -25,6 +25,7 @@ public partial class MainWindow : Window
         AboutCommand.InputGestures.Add(new KeyGesture(Key.F1));
         ExitProgramCommand.InputGestures.Add(new KeyGesture(Key.F4, ModifierKeys.Alt));
         DeleteEffectCommand.InputGestures.Add(new KeyGesture(Key.Delete));
+        VideoPlayer.Source = null;
     }
 
     #region Shortcut keys
@@ -127,7 +128,6 @@ public partial class MainWindow : Window
         ExitProgram.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
     }
     #endregion
-
     private void CreateFile_Click(object sender, EventArgs e)
     {
         CEffectsParser.CreateFile(this, EffectsList, Insert, ApplyButton, SaveFile, SaveFileAs, StatusLabel, DeleteEffect, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
@@ -155,7 +155,7 @@ public partial class MainWindow : Window
 
     private void Apply_Click(object sender, EventArgs e)
     {
-        CEffectsParser.ApplyProperties(this, EffectsList, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.ApplyProperties(this, EffectsList, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox, VideoPlayer);
     }
 
     private void DeleteButton_Click(object sender, EventArgs e)
@@ -165,7 +165,7 @@ public partial class MainWindow : Window
 
     private void EffectsList_IndexChanged(object sender, EventArgs e)
     {
-        CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox);
+        CEffectsParser.VisualProperties(EffectsList, EffectsList.SelectedIndex, XCoordTextBox, YCoordTextBox, ZCoordTextBox, EffectIDTextBox, VideoPlayer);
     }
 
     private void EffectsList_MouseDown(object sender, MouseEventArgs e)
@@ -217,6 +217,17 @@ public partial class MainWindow : Window
     private void Exit_Click(object sender, EventArgs e)
     {
         Application.Current.MainWindow.Close();
+    }
+
+    private void VideoPlayer_Unloaded(object sender, RoutedEventArgs e) 
+    {
+        VideoPlayer.Stop();
+    }
+
+    private void VideoPlayer_MediaEnded(object sender, EventArgs e) 
+    {
+        VideoPlayer.Position = TimeSpan.FromSeconds(0);
+        VideoPlayer.Play();
     }
 }
 

@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Media;
-
-namespace EffectsBinEditorWPF.Effects_File;
+﻿namespace EffectsBinEditorWPF.Effects_File;
 public class CEffectsParser
 {
     static string sPath;
@@ -145,7 +142,7 @@ public class CEffectsParser
         StatusLabel.Content = $"File changed - ({sPath}*)";
     }
 
-    public static void ApplyProperties(Window mainWindow, ListBox effectsListBox, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID)
+    public static void ApplyProperties(Window mainWindow, ListBox effectsListBox, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID, MediaElement videoPlayer)
     {
         int selectedIndex = effectsListBox.SelectedIndex;
 
@@ -165,13 +162,13 @@ public class CEffectsParser
 
             effectsDescriptionList[selectedIndex] = new CEffectsDescription(effectSgn, effectSize, unknown0, effectPositionX, effectPositionY, effectPositionZ, unknown1, effectId);
             VisualEffects(effectsListBox);
-            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
+            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID, videoPlayer);
             effectsListBox.SelectedIndex = selectedIndex;
         }
 
         catch (Exception ex)
         {
-            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID);
+            VisualProperties(effectsListBox, selectedIndex, XCoordinate, YCoordinate, ZCoordinate, EffectID, videoPlayer);
             CMessageBoxShow.MessageShow(mainWindow, "Warning", ex.Message, 255, 245, 156, 33);
         }
     }
@@ -206,7 +203,7 @@ public class CEffectsParser
         }
     }
 
-    public static void VisualProperties(ListBox effectsListBox, int selectedIndex, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID)
+    public static void VisualProperties(ListBox effectsListBox, int selectedIndex, TextBox XCoordinate, TextBox YCoordinate, TextBox ZCoordinate, TextBox EffectID, MediaElement videoPlayer)
     {
         if (effectsDescriptionList.Count == 0)
         {
@@ -214,6 +211,7 @@ public class CEffectsParser
             YCoordinate.Text = null;
             ZCoordinate.Text = null;
             EffectID.Text = null;
+            try { videoPlayer.Source = new Uri("EffectsPreview/fon.png"); videoPlayer.Stop(); } catch { videoPlayer.Source = null; }
             return;
         }
 
@@ -223,6 +221,7 @@ public class CEffectsParser
         YCoordinate.Text = effectsDescriptionList[selectedIndex].effectPositionY.ToString();
         ZCoordinate.Text = effectsDescriptionList[selectedIndex].effectPositionZ.ToString();
         EffectID.Text = effectsDescriptionList[selectedIndex].effectId.ToString();
+        try { videoPlayer.Source = null; videoPlayer.Source = new Uri($"EffectsPreview/{effectsDescriptionList[selectedIndex].effectId}.mp4", UriKind.Relative); } catch { videoPlayer.Source = null;}
     }
 
     private static void EnableButtons(MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
@@ -249,7 +248,7 @@ public class CEffectsParser
         ZCoordTextBox.IsEnabled = false;
         EffectIDTextBox.IsEnabled = false;
     }
-
+    
     private static void Error(ListBox effectsListBox, MenuItem insert, Button apply, MenuItem saveFile, MenuItem saveFileAs, Label StatusLabel, MenuItem deleteButton, TextBox XCoordTextBox, TextBox YCoordTextBox, TextBox ZCoordTextBox, TextBox EffectIDTextBox)
     {
         effectsDescriptionList.Clear();

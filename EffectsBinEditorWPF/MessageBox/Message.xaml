@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EffectsBinEditorWPF"
         mc:Ignorable="d"
-        Title="MessageBox" Height="300" Width="923" MinHeight="300" MinWidth="923" MaxHeight="300" MaxWidth="923"
+        Title="MessageBox" Height="300" Width="1187" MinHeight="300" MinWidth="1187" MaxHeight="300" MaxWidth="1187"
         WindowStyle="None"
         AllowsTransparency="True">
     <Grid>
         <Label x:Name="Title" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,46,0,0" Content="Error" FontFamily="{StaticResource ApicalC}" FontSize="35" Foreground="WhiteSmoke"/>
         <Label x:Name="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="162,99,0,0" Content="Description" FontFamily="{StaticResource ApicalC}" FontSize="25" Foreground="WhiteSmoke"/>
-        <Button x:Name="OKButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="50" Margin="650,223,0,0" Content="OK" FontFamily="{StaticResource ApicalC}" FontSize="20" Background="LightGray" Foreground="Black" Click="OKButton_Click">
+        <Button x:Name="OKButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="50" Margin="900,221,0,0" Content="OK" FontFamily="{StaticResource ApicalC}" FontSize="20" Background="LightGray" Foreground="Black" Click="OKButton_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="15"/>

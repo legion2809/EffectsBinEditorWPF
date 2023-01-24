@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EffectsBinEditorWPF"
         mc:Ignorable="d"
         Icon="/Icon/Icon.ico"
-        Title="Effects.bin Editor" Height="520" Width="939" MinHeight="520" MinWidth="939" MaxHeight="520" MaxWidth="939">
+        Title="Effects.bin Editor" Height="520" Width="1200">
 
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="NewFile_CanExecute" Executed="NewFile_Executed"/>
@@ -30,7 +30,7 @@
             <ColumnDefinition Width="81*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="940" Background="AliceBlue">
+        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="1200" Background="AliceBlue">
             <MenuItem x:Name="File" Header="File" Width="40" Height="25" Margin="10,0,0,0" FontSize="20" FontFamily="{StaticResource ApicalC}">
                 <MenuItem x:Name="NewFile" Header="New File..." InputGestureText="Ctrl + N" Click="CreateFile_Click"/>
                 <MenuItem x:Name="OpenFile" Header="Open" InputGestureText="Ctrl + O" Click="OpenFile_Click"/>
@@ -52,10 +52,9 @@
                 <MenuItem x:Name="CheckForUpdates" Header="Check For Updates..."/>
             </MenuItem>
         </Menu>
-
         <Label Content="Effects:" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="1" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="20,39,0,0" Height="38" Width="73"/>
 
-        <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="EffectsList" Margin="20,80,0,0" Grid.ColumnSpan="1" Background="White" Width="250" Height="350" FontFamily="{StaticResource ApicalC}" FontSize="20" SelectionChanged="EffectsList_IndexChanged" MouseDown="EffectsList_MouseDown">
+        <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="EffectsList" Margin="20,80,0,0" Grid.ColumnSpan="1" Background="White" Width="250" Height="360" FontFamily="{StaticResource ApicalC}" FontSize="20" SelectionChanged="EffectsList_IndexChanged" MouseDown="EffectsList_MouseDown">
             <ListBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -69,7 +68,7 @@
             </ListBox.ContextMenu>
         </ListBox>
 
-        <GroupBox Header="Properties:" Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="29,43,0,0" FontFamily="{StaticResource ApicalC}" FontSize="24" Width="326" Height="387">
+        <GroupBox Header="Properties:" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="357,39,0,0" FontFamily="{StaticResource ApicalC}" FontSize="24" Width="326" Height="391">
             <Grid>
                 <TextBox x:Name="XCoordTextBox" Height="25" FontSize="19" Margin="58,70,56,257" PreviewTextInput="FloatOnly" IsEnabled="False">
                     <TextBox.Resources>
@@ -130,8 +129,12 @@
                 <Label Content="Y:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,117,259,200"/>
                 <Label Content="Z:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,170,260,145"/>
                 <Label Content="Effect ID:" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="30,220,189,95"/>
+
             </Grid>
         </GroupBox>
-        <Label x:Name="StatusLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" FontFamily="{StaticResource ApicalC}" FontSize="19" Margin="20,446,0,0" Height="48" Width="910"/>
+        <MediaElement x:Name = "VideoPlayer" Width="360" Margin="193,6,86,-10" Grid.Column="1" Grid.ColumnSpan="2" UnloadedBehavior="Manual" MediaEnded="VideoPlayer_MediaEnded" Unloaded="VideoPlayer_Unloaded">
+        </MediaElement>
+        <Label x:Name="StatusLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" FontFamily="{StaticResource ApicalC}" FontSize="19" Margin="20,446,0,0" Height="48" Width="1156"/>
+        <Label Content="Preview:" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="{StaticResource ApicalC}" FontSize="24" Margin="193,39,0,0" Height="38" Width="112" Grid.Column="1"/>
     </Grid>
 </Window>
