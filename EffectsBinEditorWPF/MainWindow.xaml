@@ -43,10 +43,6 @@
             <MenuItem x:Name="Insert" Header="Insert" Width="60" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}" IsEnabled="False" Click="InsertEffect_Click">
                 <MenuItem x:Name="InsertEffect" Header="Insert Effect" InputGestureText="Ctrl + E"/>
             </MenuItem>
-            <MenuItem x:Name="InterfaceLanguage" Header="Interface Language" Width="150" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}">
-                <MenuItem Header="English (United Kingdom)" IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="Russian" IsCheckable="True"/>
-            </MenuItem>
             <MenuItem x:Name="About" Header="About" Width="55" Height="25" FontSize="20" Margin="5,0,0,0" FontFamily="{StaticResource ApicalC}">
                 <MenuItem x:Name="Authors" Header="Authors" InputGestureText="F1" Click="About_Click"/>
                 <MenuItem x:Name="CheckForUpdates" Header="Check For Updates..."/>
