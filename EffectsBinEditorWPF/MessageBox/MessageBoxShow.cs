@@ -1,4 +1,4 @@
-﻿namespace EffectsBinEditorWPF;
+﻿namespace Effects.bin_Editor;
 public class CMessageBoxShow
 {
     public static void MessageShow(Window mainWindow, string Header, string Text, byte a, byte r, byte g, byte b)

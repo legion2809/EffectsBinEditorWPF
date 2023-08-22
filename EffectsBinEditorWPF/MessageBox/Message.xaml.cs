@@ -1,4 +1,4 @@
-﻿namespace EffectsBinEditorWPF;
+﻿namespace Effects.bin_Editor;
 
 public partial class Message : Window
 {

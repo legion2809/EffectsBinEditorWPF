@@ -1,4 +1,5 @@
-﻿namespace EffectsBinEditorWPF.Effects_File;
+﻿namespace Effects.bin_Editor.Effects_File;
+
 class CEffectsConsts
 {
     public static readonly byte[] FILESGN = { 0x64, 0x00 };

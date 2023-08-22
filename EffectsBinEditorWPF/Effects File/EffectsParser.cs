@@ -1,4 +1,5 @@
-﻿namespace EffectsBinEditorWPF.Effects_File;
+﻿namespace Effects.bin_Editor.Effects_File;
+
 public class CEffectsParser
 {
     static string sPath;

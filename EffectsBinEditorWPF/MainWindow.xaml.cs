@@ -1,4 +1,4 @@
-﻿namespace EffectsBinEditorWPF;
+﻿namespace Effects.bin_Editor;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

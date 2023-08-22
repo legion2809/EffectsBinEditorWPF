@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icon\Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -102,6 +103,10 @@
     <None Remove="FXVideos\91.mp4" />
     <None Remove="FXVideos\fon.png" />
     <None Remove="Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon\Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -204,6 +209,7 @@
     <Resource Include="FXVideos\90.mp4" />
     <Resource Include="FXVideos\91.mp4" />
     <Resource Include="FXVideos\fon.png" />
+    <Resource Include="Icon.ico" />
     <Resource Include="Icon\Icon.ico" />
   </ItemGroup>
 
